@@ -10,7 +10,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 EStyleSheet.build({
     $statusBarColor: '#2c3e50',
-    $headerColor: '#34495e'
+    $headerColor: '#34495e',
+    $fontFamily: 'IRANSansMobile'
 });
 
 const App: () => Node = () => {

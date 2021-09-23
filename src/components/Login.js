@@ -42,14 +42,16 @@ const Login = (props) => {
             </Header>
             <Content>
                 <Form style={form.styleForm}>
-                    <Item rounded style={form.item}>
+                    <Item rounded style={form.item} error>
                         <Input placeholder='ایمیل خود را وارد کنید' style={form.input}/>
                         <Icon active name="md-mail"/>
                     </Item>
-                    <Item rounded style={form.item}>
+                    <Text style={form.error}>پر کردن این فیلد الزامی است.</Text>
+                    <Item rounded style={form.item} error>
                         <Input placeholder='پسورد خود را وارد کنید' style={form.input}/>
                         <Icon active name="md-key"/>
                     </Item>
+                    <Text style={form.error}>پر کردن این فیلد الزامی است.</Text>
                     <Button full style={form.submitButton}>
                         <Text style={form.submitText}>ورود</Text>
                     </Button>

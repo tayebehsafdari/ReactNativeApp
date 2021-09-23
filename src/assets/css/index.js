@@ -36,6 +36,12 @@ export const form = StyleSheet.create({
     submitText: {
         fontSize: 16,
         fontFamily: '$fontFamily'
+    },
+    error: {
+        fontSize: 12,
+        fontFamily: '$fontFamily',
+        color: '#ed2f2f',
+        marginBottom: 10
     }
 });
 

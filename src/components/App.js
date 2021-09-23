@@ -6,6 +6,12 @@ import {
     View,
 } from 'react-native';
 import Application from "./Application";
+import EStyleSheet from 'react-native-extended-stylesheet';
+
+EStyleSheet.build({
+    $statusBarColor: '#2c3e50',
+    $headerColor: '#34495e'
+});
 
 const App: () => Node = () => {
 

@@ -5,10 +5,12 @@ import {
     Text,
     View,
 } from 'react-native';
+import Application from "./Application";
 
 const App: () => Node = () => {
 
     return (
+        <Application/>
     );
 };
 

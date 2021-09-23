@@ -1,14 +1,32 @@
 import React from 'react';
-import {
-    View,
-    Text
-} from 'react-native';
+import {Container, Header, Left, Right, Button, Text} from 'native-base';
 
 const Login = (props) => {
     return (
-        <View style={{flex: 1, backgroundColor: '#f39c12', justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Login Page</Text>
-        </View>
+        <Container>
+            <Header
+                style={{
+                    backgroundColor: '#34495e'
+                }}
+                androidStatusBarColor='#2c3e50'
+                iosBarStyle='light-content'
+            >
+                <Left>
+                    <Button transparent>
+                        <Text style={{
+                            color: 'white',
+                            fontFamily: 'IRANSansMobile'
+                        }}>عضویت</Text>
+                    </Button>
+                </Left>
+                <Right>
+                    <Text style={{
+                        color: 'white',
+                        fontFamily: 'IRANSansMobile'
+                    }}>صفحه ورود</Text>
+                </Right>
+            </Header>
+        </Container>
     );
 }
 

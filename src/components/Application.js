@@ -1,14 +1,26 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     View,
     Text
 } from 'react-native';
+import Splash from "./Splash";
+import Home from "./Home";
+import Login from "./Login";
 
 const Application = (props) => {
+    const [view, setView] = useState(<Splash/>);
+    useEffect(() => {
+        setTimeout(() => {
+            if (true) {
+                setView(<Home/>);
+            } else {
+                setView(<Login/>);
+            }
+        }, 2000);
+
+    }, []);
     return (
-        <View style={{flex: 1, backgroundColor: '#f39c12', justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Application Page</Text>
-        </View>
+        view
     );
 }
 

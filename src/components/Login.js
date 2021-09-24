@@ -14,6 +14,7 @@ import {
     Button
 } from 'native-base';
 import {form} from "../assets/css";
+import {Actions} from 'react-native-router-flux';
 
 const Login = (props) => {
     return (
@@ -52,7 +53,7 @@ const Login = (props) => {
                         <Icon active name="md-key"/>
                     </Item>
                     <Text style={form.error}>پر کردن این فیلد الزامی است.</Text>
-                    <Button full style={form.submitButton}>
+                    <Button full style={form.submitButton} onPress={() => Actions.LoginLightbox()}>
                         <Text style={form.submitText}>ورود</Text>
                     </Button>
                 </Form>

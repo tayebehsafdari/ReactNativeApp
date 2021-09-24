@@ -3,11 +3,14 @@ import type {Node} from 'react';
 import {
     StyleSheet,
     Text,
-    View,
+    View
 } from 'react-native';
+
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {Router, Scene, Lightbox} from 'react-native-router-flux';
 import Application from "./Application";
-import EStyleSheet from 'react-native-extended-stylesheet';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import Login from "./Login";
+import Home from "./Home";
 
 EStyleSheet.build({
     $statusBarColor: '#2c3e50',
@@ -15,10 +18,25 @@ EStyleSheet.build({
     $fontFamily: 'IRANSansMobile'
 });
 
-const App: () => Node = () => {
-
+const LoginLightbox = () => {
     return (
-        <Application/>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Text>lightbox</Text>
+        </View>
+    );
+};
+
+const App: () => Node = () => {
+    return (
+        <Router>
+            <Lightbox>
+                <Scene key="root" hideNavBar>
+                    <Scene key="login" component={Login} title="Login"/>
+                    <Scene key="home" component={Application} initial/>
+                </Scene>
+                <Scene key="loginLightbox" component={LoginLightbox}/>
+            </Lightbox>
+        </Router>
     );
 };
 

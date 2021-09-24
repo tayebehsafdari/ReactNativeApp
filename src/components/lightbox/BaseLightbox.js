@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {Animated, Dimensions} from 'react-native';
 import {View, Button, Text} from 'native-base';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
 
@@ -28,16 +30,21 @@ const BaseLightbox = (props) => {
                 borderRadius: 4
             }}>
                 {children}
-                <Button>
+                <Button transparent style={{position: 'absolute', top: 0, left: 0}}>
+                    <Ionicons name="md-close-circle" size={30} color=''/>
                 </Button>
             </View>
         );
     }
 
     return (
-        <Animated.View style={{opacity}}>
+        <Animated.View style={[styles.container, {opacity}]}>
+            {_renderLightbox()}
         </Animated.View>
     );
 }
+const styles = EStyleSheet.create({
+    container: {}
+});
 
 export default BaseLightbox;

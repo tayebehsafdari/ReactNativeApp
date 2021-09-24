@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {Animated, Dimensions} from 'react-native';
-import {View, Button, Text} from 'native-base';
+import {View, Button, Icon} from 'native-base';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
 
@@ -31,7 +30,7 @@ const BaseLightbox = (props) => {
             }}>
                 {children}
                 <Button transparent style={{position: 'absolute', top: 0, left: 0}}>
-                    <Ionicons name="md-close-circle" size={30} color=''/>
+                    <Icon name="md-close-circle" style={{fontSize: 30, color: '#34495e'}}/>
                 </Button>
             </View>
         );

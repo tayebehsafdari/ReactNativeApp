@@ -10,7 +10,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Router, Scene, Lightbox} from 'react-native-router-flux';
 import Application from "./Application";
 import Login from "./Login";
-import Home from "./Home";
+import LoginLightbox from "./lightbox/LoginLightbox";
 
 EStyleSheet.build({
     $statusBarColor: '#2c3e50',
@@ -18,13 +18,13 @@ EStyleSheet.build({
     $fontFamily: 'IRANSansMobile'
 });
 
-const LoginLightbox = () => {
+/* const LoginLightbox = () => {
     return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <Text>lightbox</Text>
         </View>
     );
-};
+}; */
 
 const App: () => Node = () => {
     return (

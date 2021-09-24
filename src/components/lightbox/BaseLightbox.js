@@ -24,18 +24,18 @@ const BaseLightbox = (props) => {
                 height,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: 'white'
+                backgroundColor: 'white',
+                borderRadius: 4
             }}>
                 {children}
                 <Button>
-                    <Text>Close</Text>
                 </Button>
             </View>
         );
     }
 
     return (
-        <Animated.View style={{}}>
+        <Animated.View style={{opacity}}>
         </Animated.View>
     );
 }

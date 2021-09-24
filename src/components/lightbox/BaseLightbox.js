@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {View, Text, Animated, Dimensions} from 'react-native';
-// import {Container, Text, Spinner} from 'native-base';
+import {View, Animated, Dimensions} from 'react-native';
+import {Button, Text} from 'native-base';
 import styles from "../assets/css";
 
 const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
@@ -16,7 +16,23 @@ const BaseLightbox = (props) => {
     }, [opacity]);
 
     const _renderLightbox = () => {
-        
+        const {children, verticalPercent = 1, horizontalPercent = 1} = props;
+        const width = verticalPercent ? deviceWidth * verticalPercent : deviceWidth;
+        const height = verticalPercent ? deviceHeight * verticalPercent : deviceHeight;
+        return (
+            <View style={{
+                width,
+                height,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'white'
+            }}>
+                {children}
+                <Button>
+                    <Text>Close</Text>
+                </Button>
+            </View>
+        );
     }
 
     return (

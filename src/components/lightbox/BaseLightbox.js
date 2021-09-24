@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import {View, Animated, Dimensions} from 'react-native';
-import {Button, Text} from 'native-base';
-import styles from "../assets/css";
+import {Animated, Dimensions} from 'react-native';
+import {View, Button, Text} from 'native-base';
 
 const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
 

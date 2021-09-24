@@ -1,21 +1,14 @@
-import React, {useState} from 'react';
-import {View, Text, Animated} from 'react-native';
-// import {Container, Text, Spinner} from 'native-base';
-import styles from "../assets/css";
+import React from 'react';
+import {Text} from 'react-native';
+import BaseLightbox from "./BaseLightbox";
 
 const LoginLightbox = (props) => {
-    const [opacity, setOpacity] = useState(new Animated.Value(0));
-
-    useEffect(() => {
-        Animated.timing(opacity, {
-            toValue: 1,
-            duration: 100
-        }).start();
-    }, [opacity]);
 
     return (
-        <Animated.View style={{}}>
-        </Animated.View>
+        <BaseLightbox verticalPercent={0.5} horizontalPercent={0.9}>
+            <Text>Welcome to my website</Text>
+            <Text>Learn React Native</Text>
+        </BaseLightbox>
     );
 }
 

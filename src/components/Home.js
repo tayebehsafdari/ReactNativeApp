@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button, Container, Content, Header, Right} from "native-base";
+import {Button, Container, Content, Header, Right, Left, Icon} from "native-base";
+import {Actions} from "react-native-router-flux";
 import {form} from "../assets/css";
 
 const Home = (props) => {
@@ -12,6 +13,13 @@ const Home = (props) => {
                 androidStatusBarColor='#2c3e50'
                 iosBarStyle='light-content'
             >
+                <Left>
+                    <Icon
+                        name="md-menu"
+                        onPress={() => Actions.drawerOpen()}
+                        style={{color: 'white', fontWeight: 500}}
+                    />
+                </Left>
                 <Right>
                     <Text style={{
                         color: 'white',

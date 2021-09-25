@@ -7,10 +7,12 @@ import {
 } from 'react-native';
 
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {Router, Scene, Lightbox} from 'react-native-router-flux';
-import Application from "./Application";
+import {Router, Scene, Lightbox, Drawer} from 'react-native-router-flux';
+// import Application from "./Application";
 import Login from "./Login";
 import LoginLightbox from "./lightbox/LoginLightbox";
+import Home from "./Home";
+import Splash from "./Splash";
 
 EStyleSheet.build({
     $statusBarColor: '#2c3e50',
@@ -29,13 +31,23 @@ EStyleSheet.build({
 const App: () => Node = () => {
     return (
         <Router>
-            <Lightbox>
+            <Scene hideNavBar>
                 <Scene key="root" hideNavBar>
-                    <Scene key="login" component={Login} title="Login"/>
-                    <Scene key="home" component={Application} initial/>
+                    <Drawer contentComponent={}>
+                        <Scene key="home" component={Home} initial/>
+                    </Drawer>
                 </Scene>
-                <Scene key="loginLightbox" component={LoginLightbox}/>
-            </Lightbox>
+                <Lightbox key="auth">
+                    <Scene hideNavBar>
+                        {/*<Scene key="login" component={Login} title="Login"/>*/}
+                        {/*<Scene key="home" component={Application} initial/>*/}
+                        <Scene key="login" component={Login} initial/>
+                    </Scene>
+                    <Scene key="loginLightbox" component={LoginLightbox}/>
+                </Lightbox>
+                <Scene key="splash" component={Splash} initial/>
+                <Scene/>
+            </Scene>
         </Router>
     );
 };

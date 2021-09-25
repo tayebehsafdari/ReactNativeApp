@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Container, Content, Header, Right, Left, Icon} from "native-base";
 import {Actions} from "react-native-router-flux";
-import {form} from "../assets/css";
+import {form} from "../../assets/css";
 
 const Home = (props) => {
     return (

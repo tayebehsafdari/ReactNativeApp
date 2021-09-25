@@ -1,7 +1,7 @@
-import {StyleSheet} from 'react-native';
+// import {StyleSheet} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const index = StyleSheet.create({
+export const index = EStyleSheet.create({
     splashContainer: {
         flex: 1,
         backgroundColor: '#34495e',
@@ -15,7 +15,7 @@ export const index = StyleSheet.create({
     }
 });
 
-export const form = StyleSheet.create({
+export const form = EStyleSheet.create({
     styleForm: {
         padding: 20
     },
@@ -43,6 +43,26 @@ export const form = StyleSheet.create({
         color: '#ed2f2f',
         marginBottom: 10
     }
+});
+
+export const drawer = EStyleSheet.create({
+    container: {
+        flex: 1
+    },
+    imageHeader: {
+        height: 180,
+        width: '100%'
+    },
+    item: {
+        justifyContent: 'flex-end',
+        padding: 10
+    },
+    itemTitle: {
+        fontFamily: '$fontFamily'
+    },
+    itemIcon: {
+        marginLeft: 10
+    },
 });
 
 export default styles = {

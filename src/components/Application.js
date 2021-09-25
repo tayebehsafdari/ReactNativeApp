@@ -4,7 +4,7 @@ import {
     Text
 } from 'react-native';
 import Splash from "./Splash";
-import Home from "./Home";
+import Home from "./root/Home";
 import Login from "./Login";
 
 const Application = (props) => {

@@ -4,7 +4,7 @@ import {StatusBar} from 'react-native';
 import {Container, Text, Spinner} from 'native-base';
 import {Actions} from 'react-native-router-flux';
 import styles from "../assets/css";
-import Home from "./Home";
+import Home from "./root/Home";
 import Login from "./Login";
 
 const Splash = (props) => {

@@ -11,7 +11,7 @@ import {Router, Scene, Lightbox, Drawer} from 'react-native-router-flux';
 // import Application from "./Application";
 import Login from "./Login";
 import LoginLightbox from "./lightbox/LoginLightbox";
-import Home from "./Home";
+import Home from "./root/Home";
 import Splash from "./Splash";
 import DrawerLayout from "./DrawerLayout";
 
@@ -34,8 +34,10 @@ const App: () => Node = () => {
         <Router>
             <Scene hideNavBar>
                 <Scene key="root" hideNavBar>
-                    <Drawer contentComponent={DrawerLayout}>
-                        <Scene key="home" component={Home} initial/>
+                    <Drawer key="drawer" contentComponent={DrawerLayout}>
+                        <Scene hideNavBar>
+                            <Scene key="home" component={Home} initial/>
+                        </Scene>
                     </Drawer>
                 </Scene>
                 <Lightbox key="auth">

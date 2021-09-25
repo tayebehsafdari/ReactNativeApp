@@ -3,6 +3,7 @@ import {Button, Container, Content, Header, Right, Left, Icon, View, Text, FlatL
 import {Actions} from "react-native-router-flux";
 import {form} from "../../assets/css";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Product from "../Product";
 
 const Home = (props) => {
     const [user, setUser] = useState({
@@ -31,10 +32,15 @@ const Home = (props) => {
         getProductRequest();
     }, []);
     const getProductRequest = () => {
-        fetch('')
+        fetch(`?page=${page}`)
             .then(response => response.json())
-            .then(json => console.log(json))
+            .then(json => setProducts(json.data.data))
             .catch(error => console.log(error));
+    };
+    const renderItem = ({item}) => {
+        return (
+            <Product/>
+        );
     };
     return (
         <Container>
@@ -68,7 +74,7 @@ const Home = (props) => {
                     <Text style={form.submitText}>خروج</Text>
                 </Button>
             </Content> */}
-            <FlatList data={products} renderItem={} keyExtractor={}/>
+            <FlatList data={products} renderItem={renderItem} keyExtractor={}/>
         </Container>
     );
 }

@@ -10,23 +10,24 @@ const Home = (props) => {
         email: ''
     });
     useEffect(() => {
-        AsyncStorage.multiGet();
-        AsyncStorage.getItem('user:name', (error, result) => {
-            setUser(prevState => {
-                return {
-                    ...prevState,
-                    name: result
-                };
+        /* AsyncStorage.multiGet(['user:name', 'user:email'], (error, result) => {
+            setUser({
+                name: result[0][1],
+                email: result[1][1]
+            });
+        }); */
+        AsyncStorage.getItem('user', (error, result) => {
+            // console.log(result);
+            let user = JSON.parse(result);
+            setUser({
+                name: user.name,
+                email: user.email
             });
         });
-        AsyncStorage.getItem('user:email', (error, result) => {
-            setUser(prevState => {
-                return {
-                    ...prevState,
-                    email: result
-                };
-            });
-        });
+        AsyncStorage.multiRemove(['user:name', 'user:email']);
+        fetch('')
+            .then(response => response.json())
+            .then(json => console.log(json));
     }, []);
     return (
         <Container>

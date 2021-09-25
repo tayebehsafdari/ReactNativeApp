@@ -10,20 +10,18 @@ const Settings = (props) => {
         email: ''
     });
     useEffect(() => {
-        AsyncStorage.getItem('user:name', (error, result) => {
-            setUser(prevState => {
-                return {
-                    ...prevState,
-                    name: result
-                };
+        /* AsyncStorage.multiGet(['user:name', 'user:email'], (error, result) => {
+            setUser({
+                name: result[0][1],
+                email: result[1][1]
             });
-        });
-        AsyncStorage.getItem('user:email', (error, result) => {
-            setUser(prevState => {
-                return {
-                    ...prevState,
-                    email: result
-                };
+        }); */
+        AsyncStorage.getItem('user', (error, result) => {
+            // console.log(result);
+            let user = JSON.parse(result);
+            setUser({
+                name: user.name,
+                email: user.email
             });
         });
     }, []);
@@ -43,6 +41,12 @@ const Settings = (props) => {
             };
         });
     };
+    const changeSettings = () => {
+        // AsyncStorage.setItem('user:name', user.name);
+        // AsyncStorage.setItem('user:email', user.email);
+        AsyncStorage.setItem('user', JSON.stringify(user));
+        Actions.replace('root');
+    }
     return (
         <Container>
             <Header
@@ -86,8 +90,9 @@ const Settings = (props) => {
                         />
                         <Icon active name="md-key"/>
                     </Item>
-                    <Button full style={form.submitButton} onPress={() => Actions.LoginLightbox()}>
-                        <Text style={form.submitText}>ورود</Text>
+                    {/*Actions.LoginLightbox()*/}
+                    <Button full style={form.submitButton} onPress={changeSettings}>
+                        <Text style={form.submitText}>ثبت تغییرات</Text>
                     </Button>
                 </Form>
             </Content>

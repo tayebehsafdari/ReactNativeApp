@@ -38,9 +38,7 @@ const Home = (props) => {
             .catch(error => console.log(error));
     };
     const renderItem = ({item}) => {
-        return (
-            <Product/>
-        );
+        return <Product product={item}/>;
     };
     return (
         <Container>
@@ -74,7 +72,7 @@ const Home = (props) => {
                     <Text style={form.submitText}>خروج</Text>
                 </Button>
             </Content> */}
-            <FlatList data={products} renderItem={renderItem} keyExtractor={}/>
+            <FlatList data={products} renderItem={renderItem} keyExtractor={item => item.id}/>
         </Container>
     );
 }

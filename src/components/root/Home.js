@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Container, Content, Header, Right, Left, Icon, View, Text} from "native-base";
+import {Button, Container, Content, Header, Right, Left, Icon, View, Text, FlatList} from "native-base";
 import {Actions} from "react-native-router-flux";
 import {form} from "../../assets/css";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -27,7 +27,8 @@ const Home = (props) => {
         AsyncStorage.multiRemove(['user:name', 'user:email']);
         fetch('')
             .then(response => response.json())
-            .then(json => console.log(json));
+            .then(json => console.log(json))
+            .catch(error => console.log(error));
     }, []);
     return (
         <Container>
@@ -52,7 +53,7 @@ const Home = (props) => {
                     }}>صفحه اصلی</Text>
                 </Right>
             </Header>
-            <Content>
+            {/* <Content>
                 <View>
                     <Text>نام کاربری: {user.name}</Text>
                     <Text>ایمیل شما: {user.email}</Text>
@@ -60,7 +61,8 @@ const Home = (props) => {
                 <Button full style={[form.submitButton, {marginTop: 20, marginLeft: 10, marginRight: 10}]}>
                     <Text style={form.submitText}>خروج</Text>
                 </Button>
-            </Content>
+            </Content> */}
+            <FlatList/>
         </Container>
     );
 }

@@ -14,6 +14,7 @@ import LoginLightbox from "./lightbox/LoginLightbox";
 import Home from "./root/Home";
 import Splash from "./Splash";
 import DrawerLayout from "./DrawerLayout";
+import Settings from "./root/Settings";
 
 EStyleSheet.build({
     $statusBarColor: '#2c3e50',
@@ -34,9 +35,10 @@ const App: () => Node = () => {
         <Router>
             <Scene hideNavBar>
                 <Scene key="root" hideNavBar>
-                    <Drawer key="drawer" contentComponent={DrawerLayout}>
+                    <Drawer key="drawer" contentComponent={DrawerLayout} drawerPosition='right'>
                         <Scene hideNavBar>
                             <Scene key="home" component={Home} initial/>
+                            <Scene key="settings" component={Settings}/>
                         </Scene>
                     </Drawer>
                 </Scene>

@@ -9,6 +9,9 @@ const Home = (props) => {
         name: '',
         email: ''
     });
+    const [products, setProducts] = useState([]);
+    const [page, setPage] = useState(1);
+
     useEffect(() => {
         /* AsyncStorage.multiGet(['user:name', 'user:email'], (error, result) => {
             setUser({
@@ -25,11 +28,14 @@ const Home = (props) => {
             });
         });
         AsyncStorage.multiRemove(['user:name', 'user:email']);
+        getProductRequest();
+    }, []);
+    const getProductRequest = () => {
         fetch('')
             .then(response => response.json())
             .then(json => console.log(json))
             .catch(error => console.log(error));
-    }, []);
+    };
     return (
         <Container>
             <Header
@@ -62,7 +68,7 @@ const Home = (props) => {
                     <Text style={form.submitText}>خروج</Text>
                 </Button>
             </Content> */}
-            <FlatList/>
+            <FlatList data={products} renderItem={} keyExtractor={}/>
         </Container>
     );
 }

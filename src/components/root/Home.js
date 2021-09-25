@@ -1,9 +1,33 @@
-import React from 'react';
-import {Button, Container, Content, Header, Right, Left, Icon} from "native-base";
+import React, {useEffect, useState} from 'react';
+import {Button, Container, Content, Header, Right, Left, Icon, View, Text} from "native-base";
 import {Actions} from "react-native-router-flux";
 import {form} from "../../assets/css";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Home = (props) => {
+    const [user, setUser] = useState({
+        name: '',
+        email: ''
+    });
+    useEffect(() => {
+        AsyncStorage.multiGet();
+        AsyncStorage.getItem('user:name', (error, result) => {
+            setUser(prevState => {
+                return {
+                    ...prevState,
+                    name: result
+                };
+            });
+        });
+        AsyncStorage.getItem('user:email', (error, result) => {
+            setUser(prevState => {
+                return {
+                    ...prevState,
+                    email: result
+                };
+            });
+        });
+    }, []);
     return (
         <Container>
             <Header
@@ -24,10 +48,14 @@ const Home = (props) => {
                     <Text style={{
                         color: 'white',
                         fontFamily: 'IRANSansMobile'
-                    }}>صفحه ورود</Text>
+                    }}>صفحه اصلی</Text>
                 </Right>
             </Header>
             <Content>
+                <View>
+                    <Text>نام کاربری: {user.name}</Text>
+                    <Text>ایمیل شما: {user.email}</Text>
+                </View>
                 <Button full style={[form.submitButton, {marginTop: 20, marginLeft: 10, marginRight: 10}]}>
                     <Text style={form.submitText}>خروج</Text>
                 </Button>

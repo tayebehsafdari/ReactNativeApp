@@ -27,7 +27,7 @@ const Product = ({product}) => {
             </CardItem>
             <CardItem>
                 <Left>
-                    <Button success>
+                    <Button success onPress={() => Actions.BuyProduct({product})}>
                         <Text style={{fontFamily: 'IRANSansMobile'}}>خرید محصول</Text>
                     </Button>
                 </Left>

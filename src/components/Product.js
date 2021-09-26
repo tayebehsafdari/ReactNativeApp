@@ -3,6 +3,8 @@ import {StatusBar} from 'react-native';
 import {Card, CardItem, Left, Right, Thumbnail, Body, Text, Image, Button} from 'native-base';
 import {Actions} from 'react-native-router-flux';
 import styles from "../assets/css";
+import BuyProduct from "./BuyProduct";
+
 
 const Product = ({product}) => {
 

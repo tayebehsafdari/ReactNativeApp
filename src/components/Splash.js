@@ -11,15 +11,22 @@ const Splash = (props) => {
     const style = styles.index;
 
     useEffect(() => {
-        setTimeout(() => {
+        /* setTimeout(() => {
             if (false) {
                 Actions.reset('root');
             } else {
                 Actions.reset('auth');
             }
-        }, 2000);
-
+        }, 2000); */
+        checkUserLogin();
     }, []);
+    const checkUserLogin = async () => {
+        try {
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         /* <View style={{flex: 1, backgroundColor: '#34495e', justifyContent: 'center', alignItems: 'center'}}>
             <Text style={{fontSize: 18, marginBottom: 15}}>Splash Page</Text>

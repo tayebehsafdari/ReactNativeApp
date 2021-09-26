@@ -32,10 +32,7 @@ const BuyProduct = () => {
             >
                 <Left>
                     <Button transparent>
-                        <Text style={{
-                            color: 'white',
-                            fontFamily: 'IRANSansMobile'
-                        }}>عضویت</Text>
+                        
                     </Button>
                 </Left>
                 <Right>

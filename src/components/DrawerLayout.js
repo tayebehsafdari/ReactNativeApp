@@ -19,6 +19,10 @@ const DrawerLayout = (props) => {
                     <Text style={drawer.itemTitle}>تنظیمات</Text>
                     <Icon name="md-settings" style={drawer.itemIcon}/>
                 </Item>
+                <Item style={drawer.item} onPress={() => Actions.replace('userProduct')}>
+                    <Text style={drawer.itemTitle}>محصولات خریداری شده</Text>
+                    <Icon name="md-albums" style={drawer.itemIcon}/>
+                </Item>
             </View>
         </View>
     );

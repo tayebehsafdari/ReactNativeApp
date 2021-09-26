@@ -61,9 +61,35 @@ const Login = (props) => {
         return {display: field === '' ? 'none' : 'flex'};
     };
     const requestLoginFromApi = async (params) => {
-
+        try {
+            let {email, password} = params;
+            let response = await fetch(``, {
+                method: 'POST',
+                body: JSON.stringify({
+                    email,
+                    password
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json; charset=UTF-8'
+                },
+            });
+            let json = await response.json();
+            if (json.code === 200) {
+                setDataUser(json.data.api_token);
+            }
+            if (json.code === 422) {
+                console.log('validate');
+            }
+            if (json.code === 200) {
+                console.log('auth');
+            }
+        } catch (error) {
+            console.log(error)
+        }
     };
-
+    const setDataUser = (data) => {
+    };
     const emailError = email.error;
     const passwordError = password.error;
 
@@ -107,6 +133,7 @@ const Login = (props) => {
                             placeholder='پسورد خود را وارد کنید'
                             style={form.input}
                             onChangeText={changePasswordInput}
+                            secureTextEntry
                         />
                         <Icon active name="md-key"/>
                     </Item>

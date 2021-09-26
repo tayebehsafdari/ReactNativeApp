@@ -15,6 +15,7 @@ import Home from "./root/Home";
 import Splash from "./Splash";
 import DrawerLayout from "./DrawerLayout";
 import Settings from "./root/Settings";
+import BuyProduct from "./BuyProduct";
 
 EStyleSheet.build({
     $statusBarColor: '#2c3e50',
@@ -51,6 +52,7 @@ const App: () => Node = () => {
                     <Scene key="loginLightbox" component={LoginLightbox}/>
                 </Lightbox>
                 <Scene key="splash" component={Splash} initial/>
+                <Scene key="buyProduct" component={BuyProduct}/>
                 <Scene/>
             </Scene>
         </Router>

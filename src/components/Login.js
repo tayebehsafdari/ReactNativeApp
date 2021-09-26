@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Container,
     Header,
@@ -17,6 +17,56 @@ import {form} from "../assets/css";
 import {Actions} from 'react-native-router-flux';
 
 const Login = (props) => {
+    const [email, setEmail] = useState({
+        value: '',
+        error: ''
+    });
+    const [password, setPassword] = useState({
+        value: '',
+        error: ''
+    });
+    const login = async () => {
+        if (email.value === '') {
+            setEmail({
+                value: '',
+                error: 'فیلد ایمیل نمی تواند خالی بماند.'
+            });
+            return;
+        }
+        if (password.value === '') {
+            setPassword({
+                value: '',
+                error: 'فیلد پسورد نمی تواند خالی بماند.'
+            });
+            return;
+        }
+        await requestLoginFromApi({
+            email: email.value,
+            password: password.value
+        });
+    };
+    const changeEmailInput = (text) => {
+        setEmail({
+            value: text,
+            error: ''
+        });
+    };
+    const changePasswordInput = (text) => {
+        setPassword({
+            value: text,
+            error: ''
+        });
+    };
+    const _checkDisplay = (field) => {
+        return {display: field === '' ? 'none' : 'flex'};
+    };
+    const requestLoginFromApi = async (params) => {
+
+    };
+
+    const emailError = email.error;
+    const passwordError = password.error;
+
     return (
         <Container>
             <Header
@@ -43,17 +93,28 @@ const Login = (props) => {
             </Header>
             <Content>
                 <Form style={form.styleForm}>
-                    <Item rounded style={form.item} error>
-                        <Input placeholder='ایمیل خود را وارد کنید' style={form.input}/>
+                    <Item rounded style={form.item} error={emailError !== ''}>
+                        <Input
+                            placeholder='ایمیل خود را وارد کنید'
+                            style={form.input}
+                            onChangeText={changeEmailInput}
+                        />
                         <Icon active name="md-mail"/>
                     </Item>
-                    <Text style={form.error}>پر کردن این فیلد الزامی است.</Text>
-                    <Item rounded style={form.item} error>
-                        <Input placeholder='پسورد خود را وارد کنید' style={form.input}/>
+                    <Text style={[form.error, _checkDisplay(emailError)]}>{emailError}</Text>
+                    <Item rounded style={form.item} error={passwordError !== ''}>
+                        <Input
+                            placeholder='پسورد خود را وارد کنید'
+                            style={form.input}
+                            onChangeText={changePasswordInput}
+                        />
                         <Icon active name="md-key"/>
                     </Item>
-                    <Text style={form.error}>پر کردن این فیلد الزامی است.</Text>
-                    <Button full style={form.submitButton} onPress={() => Actions.LoginLightbox()}>
+                    <Text style={[form.error, _checkDisplay(passwordError)]}>{passwordError}</Text>
+                    {/* <Button full style={form.submitButton} onPress={() => Actions.LoginLightbox()}>
+                        <Text style={form.submitText}>ورود</Text>
+                    </Button> */}
+                    <Button full style={form.submitButton} onPress={login}>
                         <Text style={form.submitText}>ورود</Text>
                     </Button>
                 </Form>

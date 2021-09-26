@@ -1,7 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Container, Content, Header, Right, Left, Icon, View, Text, FlatList} from "native-base";
+import {
+    Button,
+    Container,
+    Content,
+    Header,
+    Right,
+    Left,
+    Icon,
+    View,
+    Text,
+    FlatList,
+    Spinner
+} from "native-base";
 import {Actions} from "react-native-router-flux";
-import {form} from "../../assets/css";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Product from "../Product";
 
@@ -12,6 +23,8 @@ const Home = (props) => {
     });
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
         /* AsyncStorage.multiGet(['user:name', 'user:email'], (error, result) => {
@@ -31,14 +44,43 @@ const Home = (props) => {
         AsyncStorage.multiRemove(['user:name', 'user:email']);
         getProductRequest();
     }, []);
-    const getProductRequest = () => {
-        fetch(`?page=${page}`)
-            .then(response => response.json())
-            .then(json => setProducts(json.data.data))
-            .catch(error => console.log(error));
+    const getProductRequest = async () => {
+        try {
+            const response = await fetch(`?page=${page}`);
+            const json = await response.json();
+            let products = json.data.data;
+            if (products.length > 0) {
+                setProducts(prevState => {
+                    return page === 1 ? products : [...prevState, products];
+                });
+                setPage(json.data.current_page);
+                setRefreshing(false);
+            }
+            setLoading(false);
+        } catch (error) {
+            console.log(error)
+        }
     };
     const renderItem = ({item}) => {
         return <Product product={item}/>;
+    };
+    const handleLoadMore = async () => {
+        if (products.length > 0) {
+            setLoading(true);
+            setPage(page + 1, () => {
+                getProductRequest();
+            });
+        }
+    };
+    const renderFooter = () => {
+        if (!loading) return null;
+        return <Spinner/>;
+    };
+    const handleRefresh = async () => {
+        setRefreshing(true);
+        setPage(1, () => {
+            getProductRequest();
+        });
     };
     return (
         <Container>
@@ -72,7 +114,17 @@ const Home = (props) => {
                     <Text style={form.submitText}>خروج</Text>
                 </Button>
             </Content> */}
-            <FlatList data={products} renderItem={renderItem} keyExtractor={item => item.id}/>
+            <FlatList
+                data={products}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                ListEmptyComponent={() => <Spinner/>}
+                onEndReached={handleLoadMore}
+                onEndReachedThreshold={0.1}
+                ListFooterComponent={renderFooter}
+                onRefresh={handleRefresh}
+                refreshing={refreshing}
+            />
         </Container>
     );
 }

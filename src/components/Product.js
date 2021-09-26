@@ -4,7 +4,7 @@ import {Card, CardItem, Left, Right, Thumbnail, Body, Text, Image, Button} from 
 import {Actions} from 'react-native-router-flux';
 import styles from "../assets/css";
 import BuyProduct from "./BuyProduct";
-
+import moment from 'moment-jalaali';
 
 const Product = ({product}) => {
 
@@ -14,7 +14,8 @@ const Product = ({product}) => {
                 <Left>
                     <Body>
                         <Text style={{marginRight: 20, fontFamily: 'IRANSansMobile'}}>{product.title}</Text>
-                        <Text style={{textAlign: 'right', fontFamily: 'IRANSansMobile'}} note>1987/05/25</Text>
+                        <Text style={{textAlign: 'right', fontFamily: 'IRANSansMobile'}}
+                              note>{moment(product.created_at).format('jYYYY/jM/jD')}</Text>
                     </Body>
                     <Thumbnail source={{uri: product.image}}/>
                 </Left>

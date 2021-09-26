@@ -68,7 +68,7 @@ const Home = (props) => {
         return <Product product={item}/>;
     };
     const handleLoadMore = async () => {
-        if (products.length > 0) {
+        if (products.length >= 6) {
             setLoading(true);
             setPage(page + 1, () => {
                 getProductRequest();

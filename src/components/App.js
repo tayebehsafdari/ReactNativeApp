@@ -16,6 +16,7 @@ import Splash from "./Splash";
 import DrawerLayout from "./DrawerLayout";
 import Settings from "./root/Settings";
 import BuyProduct from "./BuyProduct";
+import UserProduct from "./UserProduct";
 
 EStyleSheet.build({
     $statusBarColor: '#2c3e50',
@@ -40,6 +41,7 @@ const App: () => Node = () => {
                         <Scene hideNavBar>
                             <Scene key="home" component={Home} initial/>
                             <Scene key="settings" component={Settings}/>
+                            <Scene key="userProduct" component={UserProduct}/>
                         </Scene>
                     </Drawer>
                 </Scene>

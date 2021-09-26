@@ -15,6 +15,7 @@ import {
 } from 'native-base';
 import {form} from "../assets/css";
 import {Actions} from 'react-native-router-flux';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = (props) => {
     const [email, setEmail] = useState({
@@ -85,10 +86,15 @@ const Login = (props) => {
                 console.log('auth');
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     };
-    const setDataUser = (data) => {
+    const setDataUser = async (apiToken) => {
+        try {
+            await AsyncStorage.setItem('apiToken', apiToken);
+        } catch (error) {
+            console.log(error);
+        }
     };
     const emailError = email.error;
     const passwordError = password.error;

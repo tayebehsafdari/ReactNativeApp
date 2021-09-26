@@ -76,13 +76,13 @@ const Login = (props) => {
                 },
             });
             let json = await response.json();
-            if (response.code === 200) {
+            if (response.status === 200) {
                 setDataUser(json.data.api_token);
             }
-            if (response.code === 422) {
+            if (response.status === 422) {
                 console.log('validate');
             }
-            if (response.code === 200) {
+            if (response.status === 200) {
                 console.log('auth');
             }
         } catch (error) {

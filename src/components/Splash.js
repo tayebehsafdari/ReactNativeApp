@@ -6,6 +6,8 @@ import {Actions} from 'react-native-router-flux';
 import styles from "../assets/css";
 import Home from "./root/Home";
 import Login from "./Login";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import stat from "native-base/src/theme/components/stat";
 
 const Splash = (props) => {
     const style = styles.index;
@@ -18,11 +20,29 @@ const Splash = (props) => {
                 Actions.reset('auth');
             }
         }, 2000); */
-        checkUserLogin();
+        AsyncStorage.removeItem('apiToken');
+        checkUserLogin().then(status => {
+            if (status) {
+                Actions.reset('root');
+            } else {
+                Actions.reset('auth');
+            }
+        });
     }, []);
     const checkUserLogin = async () => {
         try {
-
+            let apiToken = await AsyncStorage.getItem('apiToken');
+            return apiToken === null
+                ? false
+                : await checkUserLoginFromApi(apiToken);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const checkUserLoginFromApi = async (apiToken) => {
+        try {
+            let response = await fetch(`?api_token=${apiToken}`);
+            return response.status === 200;
         } catch (error) {
             console.log(error);
         }

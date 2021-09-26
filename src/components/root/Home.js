@@ -43,6 +43,9 @@ const Home = (props) => {
         });
         AsyncStorage.multiRemove(['user:name', 'user:email']);
         getProductRequest();
+        AsyncStorage.getItem('apiToken', (error, result) => {
+            console.log(result);
+        });
     }, []);
     const getProductRequest = async () => {
         try {

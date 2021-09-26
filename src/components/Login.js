@@ -92,6 +92,7 @@ const Login = (props) => {
     const setDataUser = async (apiToken) => {
         try {
             await AsyncStorage.setItem('apiToken', apiToken);
+            Actions.reset('root');
         } catch (error) {
             console.log(error);
         }

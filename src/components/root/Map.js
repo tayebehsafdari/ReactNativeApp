@@ -1,34 +1,50 @@
 import React, {useEffect, useState} from 'react';
 import {
-    Button,
+    Fab,
     Container,
-    Content,
     Header,
     Right,
     Left,
     Icon,
-    View,
-    Text,
-    FlatList,
-    Spinner
+    Text
 } from "native-base";
 import {Actions} from "react-native-router-flux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 
 const Map = (props) => {
     const [region, setRegion] = useState({
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 35.78586601896061,
+        longitude: 51.416099582933306,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
     });
+    const [markers, setMarkers] = useState([]);
 
-    useEffect(() => {
-    }, []);
-    const onRegionChange = () => {
+    const makeMarker = ({nativeEvent}) => {
+        const pos = nativeEvent.coordinate;
+        setMarkers(prevState => {
+            return [
+                ...prevState,
+                {
+                    latitude: pos.latitude,
+                    longitude: pos.longitude,
+                }
+            ];
+        });
+    };
+    const renderMarker = (marker, index) => {
+        return <Marker
+            key={index}
+            coordinate={marker}
+        />;
+    };
+    const onRegionChange = (region) => {
         setRegion({region});
     };
+    const getCurrentPosition = () => {
+    };
+
     return (
         <Container>
             <Header
@@ -52,9 +68,26 @@ const Map = (props) => {
                     }}>نقشه</Text>
                 </Right>
             </Header>
-            <MapView region={region} onRegionChange={onRegionChange}/>
+            <MapView
+                style={{flex: 1}}
+                region={region}
+                showsTraffic={true}
+                onLongPress={makeMarker}
+                onRegionChange={onRegionChange}
+            >
+                {markers.map(renderMarker)}
+            </MapView>
+            <Fab
+                direction={up}
+                style={{backgroundColor: '#5067FF'}}
+                position={bottomRight}
+                onPress={getCurrentPosition}
+            >
+                <Icon name="md-locate"/>
+            </Fab>
         </Container>
     );
 }
+
 
 export default Map;

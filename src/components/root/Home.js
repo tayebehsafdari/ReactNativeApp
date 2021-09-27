@@ -17,6 +17,8 @@ import {Actions} from "react-native-router-flux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Product from "../Product";
 import CheckLogin from "../CheckLogin";
+import PushController from "../PushController";
+import PushNotification from 'react-native-push-notification';
 
 const Home = (props) => {
     const [user, setUser] = useState({
@@ -48,8 +50,18 @@ const Home = (props) => {
         AsyncStorage.getItem('apiToken', (error, result) => {
             console.log(result);
         });
+        PushNotification.localNotification({
+            title: "My Notification Title", // (optional)
+            message: "My Notification Message" // (required)
+        });
         const _handleAppStateChange = (appState) => {
-
+            if (appState === 'background') {
+                PushNotification.localNotificationSchedule({
+                    //... You can use all the options from localNotifications
+                    message: "My Notification Message", // (required)
+                    date: new Date(Date.now() + 5 * 1000) // in 5 secs
+                });
+            }
         };
         AppState.addEventListener('change', _handleAppStateChange);
         return () => {
@@ -97,6 +109,7 @@ const Home = (props) => {
     return (
         <Container>
             <CheckLogin/>
+            <PushController/>
             <Header
                 style={{
                     backgroundColor: '$headerColor'

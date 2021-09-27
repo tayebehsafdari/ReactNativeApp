@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {AppState} from 'react-native';
 import {
     Button,
     Container,
@@ -15,6 +16,7 @@ import {
 import {Actions} from "react-native-router-flux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Product from "../Product";
+import CheckLogin from "../CheckLogin";
 
 const Home = (props) => {
     const [user, setUser] = useState({
@@ -46,6 +48,13 @@ const Home = (props) => {
         AsyncStorage.getItem('apiToken', (error, result) => {
             console.log(result);
         });
+        const _handleAppStateChange = (appState) => {
+
+        };
+        AppState.addEventListener('change', _handleAppStateChange);
+        return () => {
+            AppState.removeEventListener('change', _handleAppStateChange);
+        };
     }, []);
     const getProductRequest = async () => {
         try {
@@ -87,6 +96,7 @@ const Home = (props) => {
     };
     return (
         <Container>
+            <CheckLogin/>
             <Header
                 style={{
                     backgroundColor: '$headerColor'

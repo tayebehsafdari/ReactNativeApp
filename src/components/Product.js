@@ -7,14 +7,20 @@ import BuyProduct from "./BuyProduct";
 import moment from 'moment-jalaali';
 
 const Product = ({product}) => {
-
     return (
         <Card style={{flex: 0}}>
             <CardItem>
                 <Left>
                     <Body>
-                        <Text style={{marginRight: 20, fontFamily: 'IRANSansMobile'}}>{product.title}</Text>
-                        <Text style={{textAlign: 'right', fontFamily: 'IRANSansMobile'}}
+                        <Text style={{
+                            marginRight: 20,
+                            fontFamily: 'IRANSansMobile',
+                            textAlign: 'right'
+                        }}>{product.title}</Text>
+                        <Text style={{
+                            textAlign: 'right',
+                            fontFamily: 'IRANSansMobile'
+                        }}
                               note>{moment(product.created_at).format('jYYYY/jM/jD')}</Text>
                     </Body>
                     <Thumbnail source={{uri: product.image}}/>

@@ -17,6 +17,7 @@ import DrawerLayout from "./DrawerLayout";
 import Settings from "./root/Settings";
 import BuyProduct from "./BuyProduct";
 import UserProduct from "./UserProduct";
+import Map from "./root/Map";
 
 EStyleSheet.build({
     $statusBarColor: '#2c3e50',
@@ -39,9 +40,10 @@ const App: () => Node = () => {
                 <Scene key="root" hideNavBar>
                     <Drawer key="drawer" contentComponent={DrawerLayout} drawerPosition='right'>
                         <Scene hideNavBar>
-                            <Scene key="home" component={Home} initial/>
+                            <Scene key="home" component={Home}/>
                             <Scene key="settings" component={Settings}/>
                             <Scene key="userProduct" component={UserProduct}/>
+                            <Scene key="map" component={Map} initial/>
                         </Scene>
                     </Drawer>
                 </Scene>

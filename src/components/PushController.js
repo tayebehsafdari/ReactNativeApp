@@ -4,7 +4,7 @@ import styles from "../assets/css";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-const CheckLogin = (props) => {
+const PushController = (props) => {
     useEffect(() => {
         checkUserLogin().then(status => {
             if (!status) {
@@ -34,4 +34,4 @@ const CheckLogin = (props) => {
     return null;
 }
 
-export default CheckLogin;
+export default PushController;

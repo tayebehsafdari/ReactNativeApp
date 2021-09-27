@@ -43,6 +43,32 @@ const Map = (props) => {
         setRegion({region});
     };
     const getCurrentPosition = () => {
+        /* navigator.geolocation.getCurrentPosition(position => {
+            setRegion({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            });
+        }, error => {
+            console.log(error);
+        }, {
+            enableHighAccuracy: true,
+            timeout: 20000,
+            maximumAge: 1000,
+            distanceFilter: 10
+        }); */
+        navigator.geolocation.watchPosition(position => {
+            setRegion({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            });
+        }, error => {
+            console.log(error);
+        }, {
+            enableHighAccuracy: true,
+            timeout: 20000,
+            maximumAge: 1000,
+            distanceFilter: 10
+        });
     };
 
     return (
@@ -74,6 +100,7 @@ const Map = (props) => {
                 showsTraffic={true}
                 onLongPress={makeMarker}
                 onRegionChange={onRegionChange}
+                showsUserLocation={true}
             >
                 {markers.map(renderMarker)}
             </MapView>

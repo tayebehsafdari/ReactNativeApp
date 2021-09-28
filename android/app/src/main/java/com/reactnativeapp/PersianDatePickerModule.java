@@ -48,7 +48,7 @@ public class PersianDatePickerModule extends ReactContextBaseJavaModule implemen
         DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
                 PersianDatePickerModule.this,
                 year,
-                month + 1,
+                month - 1,
                 day
         );
         datePickerDialog.show(getCurrentActivity().getFragmentManager(), "Datepickerdialog");

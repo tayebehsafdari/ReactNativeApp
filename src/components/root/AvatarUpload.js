@@ -14,6 +14,7 @@ import {
 import {Actions} from "react-native-router-flux";
 import {picker} from "../ImagePicker";
 import {uploader} from "../UploadImage";
+import {PersianDatePicker} from "../OwnNativeModule";
 
 const AvatarUpload = (props) => {
     const [avatarSource, setAvatarSource] = useState(null);
@@ -35,6 +36,9 @@ const AvatarUpload = (props) => {
         uploader([{name: 'avatar', filename: 'avatar.png', data},])
             .then(res => console.log(res.text()))
             .catch(err => console.log(err));
+    };
+    const showDatePicker = () => {
+        PersianDatePicker.showDatePicker();
     };
     const image = avatarSource === null ? null : <Image source={avatarSource} style={{width: 220, height: 200}}/>;
     return (
@@ -79,6 +83,15 @@ const AvatarUpload = (props) => {
                             paddingLeft: 10
                         }}>
                             آپلود تصویر
+                        </Text>
+                    </Button>
+                    <Button danger onPress={showDatePicker}>
+                        <Text style={{
+                            fontFamily: 'IRANSansMobile',
+                            paddingRight: 10,
+                            paddingLeft: 10
+                        }}>
+                            گرفتن تاریخ
                         </Text>
                     </Button>
                 </View>

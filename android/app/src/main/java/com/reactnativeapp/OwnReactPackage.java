@@ -22,6 +22,7 @@ public class OwnReactPackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new OwnToastModule(reactContext));
+        modules.add(new PersianDatePickerModule(reactContext));
 
         return modules;
     }

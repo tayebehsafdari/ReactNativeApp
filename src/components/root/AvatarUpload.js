@@ -7,8 +7,10 @@ import {
     Left,
     Icon,
     View,
-    Text
+    Text,
+    Image
 } from "native-base";
+
 import {Actions} from "react-native-router-flux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -41,7 +43,16 @@ const AvatarUpload = (props) => {
                     }}>آپلود تصویر</Text>
                 </Right>
             </Header>
-            <View></View>
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={{fontFamily: 'IRANSansMobile'}}>به صفحه آپلود تصویر خوش آمدید.</Text>
+                <Button>
+                    <Text style={{fontFamily: 'IRANSansMobile'}}>انتخاب تصویر</Text>
+                </Button>
+                <Button>
+                    <Text style={{fontFamily: 'IRANSansMobile'}}>آپلود تصویر</Text>
+                </Button>
+                <Image source={{uri: ''}} style={{width: 220, height: 200}}/>
+            </View>
         </Container>
     );
 }

@@ -38,7 +38,8 @@ const AvatarUpload = (props) => {
             .catch(err => console.log(err));
     };
     const showDatePicker = () => {
-        PersianDatePicker.showDatePicker();
+        // PersianDatePicker.showDatePicker().then(date => console.log(date));
+        PersianDatePicker.setDatePicker(1400, 7, 6).then(date => console.log(date));
     };
     const image = avatarSource === null ? null : <Image source={avatarSource} style={{width: 220, height: 200}}/>;
     return (
@@ -76,7 +77,7 @@ const AvatarUpload = (props) => {
                             انتخاب تصویر
                         </Text>
                     </Button>
-                    <Button success onPress={uploadImage}>
+                    <Button style={{marginRight: 10}} success onPress={uploadImage}>
                         <Text style={{
                             fontFamily: 'IRANSansMobile',
                             paddingRight: 10,

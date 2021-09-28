@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import type {Node} from 'react';
 import {
     StyleSheet,
@@ -19,6 +19,7 @@ import BuyProduct from "./BuyProduct";
 import UserProduct from "./UserProduct";
 import Map from "./root/Map";
 import AvatarUpload from "./root/AvatarUpload";
+import BackgroundTimer from 'react-native-background-timer';
 
 EStyleSheet.build({
     $statusBarColor: '#2c3e50',
@@ -35,6 +36,14 @@ EStyleSheet.build({
 }; */
 
 const App: () => Node = () => {
+    useEffect(() => {
+        const intervalId = BackgroundTimer.setInterval(() => {
+            console.log('tic');
+        }, 5000);
+        return () => {
+            BackgroundTimer.clearInterval(intervalId);
+        };
+    }, []);
     return (
         <Router>
             <Scene hideNavBar>

@@ -13,6 +13,7 @@ import {
 
 import {Actions} from "react-native-router-flux";
 import {picker} from "../ImagePicker";
+import {uploader} from "../UploadImage";
 
 const AvatarUpload = (props) => {
     const [avatarSource, setAvatarSource] = useState(null);
@@ -29,6 +30,11 @@ const AvatarUpload = (props) => {
                 console.log(data);
             });
         });
+    };
+    const uploadImage = () => {
+        uploader([{name: 'avatar', filename: 'avatar.png', data},])
+            .then(res => console.log(res.text()))
+            .catch(err => console.log(err));
     };
     const image = avatarSource === null ? null : <Image source={avatarSource} style={{width: 220, height: 200}}/>;
     return (
@@ -66,7 +72,7 @@ const AvatarUpload = (props) => {
                             انتخاب تصویر
                         </Text>
                     </Button>
-                    <Button success>
+                    <Button success onPress={uploadImage}>
                         <Text style={{
                             fontFamily: 'IRANSansMobile',
                             paddingRight: 10,

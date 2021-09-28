@@ -21,7 +21,7 @@ public class OwnReactPackage implements ReactPackage {
             ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
 
-        modules.add(new ToastModule(reactContext));
+        modules.add(new OwnToastModule(reactContext));
 
         return modules;
     }

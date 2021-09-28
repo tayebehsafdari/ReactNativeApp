@@ -20,6 +20,7 @@ import UserProduct from "./UserProduct";
 import Map from "./root/Map";
 import AvatarUpload from "./root/AvatarUpload";
 import BackgroundTimer from 'react-native-background-timer';
+import {Toast} from './OwnNativeModule';
 
 EStyleSheet.build({
     $statusBarColor: '#2c3e50',
@@ -40,6 +41,7 @@ const App: () => Node = () => {
         const intervalId = BackgroundTimer.setInterval(() => {
             console.log('tic');
         }, 5000);
+        Toast.show('Hello React Native', Toast.LONG);
         return () => {
             BackgroundTimer.clearInterval(intervalId);
         };

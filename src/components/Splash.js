@@ -32,7 +32,8 @@ const Splash = (props) => {
     }, []);
     const checkUserLogin = async () => {
         try {
-            let apiToken = await AsyncStorage.getItem('apiToken');
+            // let apiToken = await AsyncStorage.getItem('apiToken');
+            let apiToken = props.user.apiToken;
             return apiToken === null
                 ? false
                 : await checkUserLoginFromApi(apiToken);

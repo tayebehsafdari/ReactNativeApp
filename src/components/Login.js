@@ -16,6 +16,8 @@ import {
 import {form} from "../assets/css";
 import {Actions} from 'react-native-router-flux';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {connect} from "react-redux";
+import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
 
 const Login = (props) => {
     const [email, setEmail] = useState({
@@ -91,7 +93,8 @@ const Login = (props) => {
     };
     const setDataUser = async (apiToken) => {
         try {
-            await AsyncStorage.setItem('apiToken', apiToken);
+            // await AsyncStorage.setItem('apiToken', apiToken);
+            props.user.
             Actions.reset('root');
         } catch (error) {
             console.log(error);
@@ -156,5 +159,9 @@ const Login = (props) => {
         </Container>
     );
 }
-
-export default Login;
+const mapDispatchToProps = state => {
+    return {
+        user: state.user
+    };
+};
+export default connect(null,mapDispatchToProps)(Login);

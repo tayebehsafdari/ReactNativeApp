@@ -21,6 +21,8 @@ import Map from "./root/Map";
 import AvatarUpload from "./root/AvatarUpload";
 import BackgroundTimer from 'react-native-background-timer';
 import {Toast} from './OwnNativeModule';
+import {Provider, connect} from 'react-redux';
+import store from './../redux/store';
 
 EStyleSheet.build({
     $statusBarColor: '#2c3e50',
@@ -46,33 +48,36 @@ const App: () => Node = () => {
             BackgroundTimer.clearInterval(intervalId);
         };
     }, []);
+    const RouterWithRedux = connect()(Router);
     return (
-        <Router>
-            <Scene hideNavBar>
-                <Scene key="root" hideNavBar>
-                    <Drawer key="drawer" contentComponent={DrawerLayout} drawerPosition='right'>
-                        <Scene hideNavBar>
-                            <Scene key="home" component={Home} initial/>
-                            <Scene key="settings" component={Settings}/>
-                            <Scene key="userProduct" component={UserProduct}/>
-                            <Scene key="map" component={Map}/>
-                            <Scene key="avatarUpload" component={AvatarUpload}/>
-                        </Scene>
-                    </Drawer>
-                </Scene>
-                <Lightbox key="auth">
-                    <Scene hideNavBar>
-                        {/*<Scene key="login" component={Login} title="Login"/>*/}
-                        {/*<Scene key="home" component={Application} initial/>*/}
-                        <Scene key="login" component={Login} initial/>
+        <Provider store={store}>
+            <RouterWithRedux>
+                <Scene hideNavBar>
+                    <Scene key="root" hideNavBar>
+                        <Drawer key="drawer" contentComponent={DrawerLayout} drawerPosition='right'>
+                            <Scene hideNavBar>
+                                <Scene key="home" component={Home} initial/>
+                                <Scene key="settings" component={Settings}/>
+                                <Scene key="userProduct" component={UserProduct}/>
+                                <Scene key="map" component={Map}/>
+                                <Scene key="avatarUpload" component={AvatarUpload}/>
+                            </Scene>
+                        </Drawer>
                     </Scene>
-                    <Scene key="loginLightbox" component={LoginLightbox}/>
-                </Lightbox>
-                <Scene key="splash" component={Splash} initial/>
-                <Scene key="buyProduct" component={BuyProduct}/>
-                <Scene/>
-            </Scene>
-        </Router>
+                    <Lightbox key="auth">
+                        <Scene hideNavBar>
+                            {/*<Scene key="login" component={Login} title="Login"/>*/}
+                            {/*<Scene key="home" component={Application} initial/>*/}
+                            <Scene key="login" component={Login} initial/>
+                        </Scene>
+                        <Scene key="loginLightbox" component={LoginLightbox}/>
+                    </Lightbox>
+                    <Scene key="splash" component={Splash} initial/>
+                    <Scene key="buyProduct" component={BuyProduct}/>
+                    <Scene/>
+                </Scene>
+            </RouterWithRedux>
+        </Provider>
     );
 };
 

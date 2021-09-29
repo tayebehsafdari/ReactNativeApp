@@ -20,6 +20,7 @@ export default user = (state = initialState, action = {}) => {
                 email: user.email,
                 apiToken: user.apiToken
             };
+            break;
         default:
             return state;
     }

@@ -8,6 +8,7 @@ import Home from "./root/Home";
 import Login from "./Login";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import stat from "native-base/src/theme/components/stat";
+import {connect} from "react-redux";
 
 const Splash = (props) => {
     const style = styles.index;
@@ -63,4 +64,9 @@ const Splash = (props) => {
     );
 }
 
-export default Splash;
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    };
+};
+export default connect(mapStateToProps)(Splash);

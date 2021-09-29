@@ -1,4 +1,4 @@
-import {RECEIVE_PRODUCTS, SET_USER} from "./type";
+import {INCREMENT_PRODUCTS_PAGE, RECEIVE_PRODUCTS, SET_USER} from "./type";
 
 export const setUser = user => ({
     type: SET_USER,
@@ -8,8 +8,14 @@ export const setUser = user => ({
 
 export const receiveProducts = (products, page) => ({
     type: RECEIVE_PRODUCTS,
-    products: {
+    payload: {
         products,
         page
     }
+});
+
+export const incrementPage = () => ({
+    type: INCREMENT_PRODUCTS_PAGE,
+    // payload: user
+    user
 });

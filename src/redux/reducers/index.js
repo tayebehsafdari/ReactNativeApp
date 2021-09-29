@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import user from "./userReducer";
-import {SET_USER} from "../actions/type";
+import products from "./productReducer";
+
 
 const rehydrated = (state = false, action) => {
     switch (action.type) {
@@ -14,5 +15,6 @@ const rehydrated = (state = false, action) => {
 
 export default combineReducers({
     user,
-    rehydrated
+    rehydrated,
+    products
 });

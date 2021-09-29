@@ -19,14 +19,16 @@ import Product from "../Product";
 import CheckLogin from "../CheckLogin";
 import PushController from "../PushController";
 import PushNotification from 'react-native-push-notification';
+import {connect} from "react-redux";
+import {incrementPage, receiveProducts} from "../../redux/actions";
 
 const Home = (props) => {
     const [user, setUser] = useState({
         name: '',
         email: ''
     });
-    const [products, setProducts] = useState([]);
-    const [page, setPage] = useState(1);
+    // const [products, setProducts] = useState([]);
+    // const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
 
@@ -70,15 +72,16 @@ const Home = (props) => {
     }, []);
     const getProductRequest = async () => {
         try {
-            const response = await fetch(`?page=${page}`);
+            const response = await fetch(`?page=${props.page}`);
             const json = await response.json();
             let products = json.data.data;
             if (products.length > 0) {
-                setProducts(prevState => {
+                /* setProducts(prevState => {
                     return page === 1 ? products : [...prevState, products];
                 });
-                setPage(json.data.current_page);
+                setPage(json.data.current_page); */
                 setRefreshing(false);
+                props.receiveProducts(products, json.data.current_page);
             }
             setLoading(false);
         } catch (error) {
@@ -89,11 +92,14 @@ const Home = (props) => {
         return <Product product={item}/>;
     };
     const handleLoadMore = async () => {
-        if (products.length >= 6) {
-            setLoading(true);
-            setPage(page + 1, () => {
+        if (props.products.length >= 6) {
+            setLoading(true, () => {
                 getProductRequest();
             });
+            /* setPage(props.page + 1, () => {
+                 getProductRequest();
+             }); */
+            props.incrementPage();
         }
     };
     const renderFooter = () => {
@@ -141,7 +147,7 @@ const Home = (props) => {
                 </Button>
             </Content> */}
             <FlatList
-                data={products}
+                data={props.products}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 ListEmptyComponent={() => <Spinner/>}
@@ -154,5 +160,16 @@ const Home = (props) => {
         </Container>
     );
 }
-
-export default Home;
+const mapStateToProps = state => {
+    return {
+        products: state.products.data,
+        page: state.products.page
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        receiveProducts: (products, page) => dispatch(receiveProducts(products, page)),
+        incrementPage: () => dispatch(incrementPage())
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

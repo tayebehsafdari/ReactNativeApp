@@ -1,4 +1,4 @@
-import {RECEIVE_PRODUCTS} from "../actions/type";
+import {INCREMENT_PRODUCTS_PAGE, RECEIVE_PRODUCTS} from "../actions/type";
 
 const initialState = {
     data: [],
@@ -11,7 +11,17 @@ let products;
 export default products = (state = initialState, action = {}) => {
     switch (action.type) {
         case RECEIVE_PRODUCTS:
-            return {};
+            const {products, page} = action.payload;
+            return {
+                data: page === 1 ? products : [...state.data, ...products],
+                page
+            };
+            break;
+        case INCREMENT_PRODUCTS_PAGE:
+            return {
+                ...state,
+                page: state.page + 1
+            };
             break;
         default:
             return state;

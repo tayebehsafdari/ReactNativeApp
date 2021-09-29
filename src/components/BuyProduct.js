@@ -33,7 +33,7 @@ const BuyProduct = (props) => {
                 uri: 'https://reactnative.dev/',
                 method: 'POST',
                 // body: `product_id=${productId}&api_token=${apiToken}`
-                body: `product_id=${productId}&api_token=${props.user.apiToken}`
+                body: `product_id=${props.product.id}&api_token=${props.user.apiToken}`
             }}
             startInLoadingState={true}
             renderLoading={renderLoading}

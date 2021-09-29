@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import {createLogger} from 'redux-logger';
 import reducers from './../reducers';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {persistStore} from 'redux-persist';
+import {autoRehydrate, persistStore} from 'redux-persist';
 
 
 const middleware = [thunk];
@@ -13,7 +13,8 @@ const store = createStore(
     reducers,
     undefined,
     compose(
-        applyMiddleware(...middleware)
+        applyMiddleware(...middleware),
+        autoRehydrate()
     )
 );
 

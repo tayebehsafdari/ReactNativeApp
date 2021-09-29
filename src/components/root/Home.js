@@ -20,7 +20,7 @@ import CheckLogin from "../CheckLogin";
 import PushController from "../PushController";
 import PushNotification from 'react-native-push-notification';
 import {connect} from "react-redux";
-import {incrementPage, receiveProducts} from "../../redux/actions";
+import {decrementPage, incrementPage, receiveProducts} from "../../redux/actions";
 
 const Home = (props) => {
     const [user, setUser] = useState({
@@ -169,7 +169,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         receiveProducts: (products, page) => dispatch(receiveProducts(products, page)),
-        incrementPage: () => dispatch(incrementPage())
+        incrementPage: () => dispatch(incrementPage()),
+        decrementPage: () => dispatch(decrementPage())
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,4 +1,4 @@
-import {INCREMENT_PRODUCTS_PAGE, RECEIVE_PRODUCTS} from "../actions/type";
+import {DECREMENT_PRODUCTS_PAGE, INCREMENT_PRODUCTS_PAGE, RECEIVE_PRODUCTS} from "../actions/type";
 
 const initialState = {
     data: [],
@@ -18,6 +18,12 @@ export default products = (state = initialState, action = {}) => {
             };
             break;
         case INCREMENT_PRODUCTS_PAGE:
+            return {
+                ...state,
+                page: state.page + 1
+            };
+            break;
+        case DECREMENT_PRODUCTS_PAGE:
             return {
                 ...state,
                 page: state.page + 1

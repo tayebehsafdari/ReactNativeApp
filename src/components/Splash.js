@@ -22,13 +22,13 @@ const Splash = (props) => {
             }
         }, 2000); */
         AsyncStorage.removeItem('apiToken');
-        checkUserLogin().then(status => {
+        /* checkUserLogin().then(status => {
             if (status) {
                 Actions.reset('root');
             } else {
                 Actions.reset('auth');
             }
-        });
+        }); */
     }, []);
     const checkUserLogin = async () => {
         try {
@@ -49,6 +49,16 @@ const Splash = (props) => {
             console.log(error);
         }
     };
+    if (props.rehydrated === true) {
+        console.log(props.rehydrated);
+        checkUserLogin().then(status => {
+            if (status) {
+                Actions.reset('root');
+            } else {
+                Actions.reset('auth');
+            }
+        });
+    }
     return (
         /* <View style={{flex: 1, backgroundColor: '#34495e', justifyContent: 'center', alignItems: 'center'}}>
             <Text style={{fontSize: 18, marginBottom: 15}}>Splash Page</Text>
@@ -67,7 +77,8 @@ const Splash = (props) => {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        rehydrated: state.rehydrated
     };
 };
 export default connect(mapStateToProps)(Splash);

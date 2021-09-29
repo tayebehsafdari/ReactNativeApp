@@ -20,7 +20,8 @@ import CheckLogin from "../CheckLogin";
 import PushController from "../PushController";
 import PushNotification from 'react-native-push-notification';
 import {connect} from "react-redux";
-import {decrementPage, incrementPage, receiveProducts} from "../../redux/actions";
+import {decrementPage, incrementPage, receiveProducts, refreshProducts} from "../../redux/actions";
+import NetInfo from "@react-native-community/netinfo";
 
 const Home = (props) => {
     const [user, setUser] = useState({
@@ -39,6 +40,17 @@ const Home = (props) => {
                 email: result[1][1]
             });
         }); */
+        NetInfo.fetch().then(state => {
+            console.log("Connection type", state.type);
+            console.log("Is connected?", state.isConnected);
+            if (state.isConnected) {
+                props.refreshProducts();
+                getProductRequest();
+            } else {
+                alert('اتصال اینترنت خود را چک کنید.');
+            }
+        });
+
         AsyncStorage.getItem('user', (error, result) => {
             // console.log(result);
             let user = JSON.parse(result);
@@ -82,6 +94,8 @@ const Home = (props) => {
                 setPage(json.data.current_page); */
                 setRefreshing(false);
                 props.receiveProducts(products, json.data.current_page);
+            } else {
+                props.decrementPage();
             }
             setLoading(false);
         } catch (error) {
@@ -108,9 +122,10 @@ const Home = (props) => {
     };
     const handleRefresh = async () => {
         setRefreshing(true);
-        setPage(1, () => {
+        /* setPage(1, () => {
             getProductRequest();
-        });
+        }); */
+        props.refreshProducts();
     };
     return (
         <Container>
@@ -170,7 +185,8 @@ const mapDispatchToProps = dispatch => {
     return {
         receiveProducts: (products, page) => dispatch(receiveProducts(products, page)),
         incrementPage: () => dispatch(incrementPage()),
-        decrementPage: () => dispatch(decrementPage())
+        decrementPage: () => dispatch(decrementPage()),
+        refreshProducts: () => dispatch(refreshProducts())
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

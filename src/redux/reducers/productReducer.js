@@ -1,4 +1,4 @@
-import {DECREMENT_PRODUCTS_PAGE, INCREMENT_PRODUCTS_PAGE, RECEIVE_PRODUCTS} from "../actions/type";
+import {DECREMENT_PRODUCTS_PAGE, INCREMENT_PRODUCTS_PAGE, RECEIVE_PRODUCTS, REFRESH_PRODUCTS} from "../actions/type";
 
 const initialState = {
     data: [],
@@ -26,7 +26,13 @@ export default products = (state = initialState, action = {}) => {
         case DECREMENT_PRODUCTS_PAGE:
             return {
                 ...state,
-                page: state.page + 1
+                page: state.page - 1
+            };
+            break;
+        case REFRESH_PRODUCTS:
+            return {
+                ...state,
+                page: 1
             };
             break;
         default:

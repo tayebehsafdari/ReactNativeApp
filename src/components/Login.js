@@ -16,8 +16,8 @@ import {
 import {form} from "../assets/css";
 import {Actions} from 'react-native-router-flux';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {setUser} from "../redux/actions";
 import {connect} from "react-redux";
-import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
 
 const Login = (props) => {
     const [email, setEmail] = useState({
@@ -79,7 +79,9 @@ const Login = (props) => {
             });
             let json = await response.json();
             if (response.status === 200) {
-                setDataUser(json.data.api_token);
+                // setDataUser(json.data.api_token);
+                props.setUser(json.data.user);
+                Actions.reset('root');
             }
             if (response.status === 422) {
                 console.log('validate');
@@ -93,8 +95,7 @@ const Login = (props) => {
     };
     const setDataUser = async (apiToken) => {
         try {
-            // await AsyncStorage.setItem('apiToken', apiToken);
-            props.user.
+            await AsyncStorage.setItem('apiToken', apiToken);
             Actions.reset('root');
         } catch (error) {
             console.log(error);
@@ -159,9 +160,12 @@ const Login = (props) => {
         </Container>
     );
 }
-const mapDispatchToProps = state => {
+
+const mapDispatchToProps = dispatch => {
     return {
-        user: state.user
+        setUser: user => {
+            dispatch(setUser(user))
+        }
     };
 };
-export default connect(null,mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

@@ -15,8 +15,9 @@ import {Actions} from 'react-native-router-flux';
 import styles, {form} from "../assets/css";
 import {WebView} from 'react-native-webview';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {connect} from "react-redux";
 
-const BuyProduct = ({product}) => {
+const BuyProduct = (props) => {
     const [apiToken, setApiToken] = useState(null);
     useEffect(() => {
         AsyncStorage.getItem('apiToken', (error, apiToken) => setApiToken(apiToken));
@@ -31,7 +32,8 @@ const BuyProduct = ({product}) => {
             source={{
                 uri: 'https://reactnative.dev/',
                 method: 'POST',
-                body: `product_id=${productId}&api_token=${apiToken}`
+                // body: `product_id=${productId}&api_token=${apiToken}`
+                body: `product_id=${productId}&api_token=${props.user.apiToken}`
             }}
             startInLoadingState={true}
             renderLoading={renderLoading}
@@ -55,13 +57,19 @@ const BuyProduct = ({product}) => {
                     <Text style={{
                         color: 'white',
                         fontFamily: 'IRANSansMobile'
-                    }}>خرید {product.title}: </Text>
+                    }}>خرید {props.product.title}: </Text>
                 </Right>
             </Header>
-            {apiToken === null ? renderLoading() : renderWebView(product.id)}
+            {/*{apiToken === null ? renderLoading() : renderWebView(props.product.id)}*/}
+            {renderWebView(props.product.id)}
         </Container>
     )
         ;
 }
 
-export default BuyProduct;
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    };
+};
+export default connect(mapStateToProps)(BuyProduct);

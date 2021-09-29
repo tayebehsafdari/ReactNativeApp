@@ -19,7 +19,8 @@ const store = createStore(
 );
 
 const persistConfig = {
-    storage: AsyncStorage
+    storage: AsyncStorage,
+    blacklist: ['products']
 };
 
 persistStore(store, persistConfig);
